@@ -1,0 +1,156 @@
+\chapter{Definitions}
+
+
+\section{Signals and Sequences}
+
+\begin{defn}{\textbf{Kronecker Delta Function}}
+    The Kronecker delta function, $\delta[n]$, is a sequence defined as
+
+    \begin{equation}
+        \delta [n] = \left\{ {\begin{array}{*{20}{c}}
+            0&{n \ne 0}\\
+            1&{n = 1}
+            \end{array}} \right.,n \in \bN
+    \end{equation}
+\end{defn}
+
+\textbf{Remark:}
+\begin{equation}
+    x[n] = \sum\limits_{k =  - \infty }^\infty  {x[k]\delta [n - k]} 
+\end{equation}
+
+
+\begin{defn}{\textbf{Periodic Sampling}}
+A discrete-time representation $x[n]$ of a continuous signal $x_a(t)$ can be obtained from periodic sampling according to the relation
+\begin{equation}
+x[n] = x_a(nT)
+\end{equation}
+where $T$ is the sampling period and $f_s=1/T$ is the sampling frequency.
+\end{defn}
+
+\begin{defn}{\textbf{Linear Constant Coefficient Difference Equation}}
+    A linear constant coefficient difference equation (LCCDE) is an equation of the form 
+    \begin{equation}
+        \sum\limits_{k=0}^{N} a_k y[n-k] = \sum\limits_{m=0}^{M} b_m x[n-m].
+    \end{equation}
+
+    Notably, linear time-invariant systems can have difference equation representations. 
+\end{defn}
+
+\section{Transforms}
+
+\begin{defn}{\textbf{Continuous-Time Fourier Transform}}
+If $x_a(t)$ is a function where $t \in \bR$, then its continuous-time Fourier transform $X_a(\Omega)$ is 
+\begin{equation}
+X_a(\Omega) = \int\limits_{ - \infty }^\infty  {{x_a}(t){e^{ - j\Omega t}}dt}.
+\end{equation}
+
+and its inverse transformation is
+
+\begin{equation}
+{x_a}\left( t \right) = \frac{1}{{2\pi }}\int\limits_{ - \infty }^\infty  {{X_a}(\Omega ){e^{ j\Omega t}}d\Omega }. 
+\end{equation}
+\end{defn}
+
+\begin{defn}{\textbf{Discrete-Time Fourier Transform}}
+If $x[n]$ is a function where $n \in \bN$, then its discrete-time Fourier transform $X(\omega)$ is 
+\begin{equation}
+X(\omega) = \sum\limits_{n =  - \infty }^\infty  {x[n]{e^{ - j\omega n}}}. 
+\end{equation}
+\end{defn}
+
+DTFT General Properties
+
+\begin{enumerate}
+    \item $X(\omega)$ is a continuous function.
+    \item $X(\omega)$ is a periodic function.
+    \item Parseval's theorem holds that
+     \begin{equation}
+        \sum\limits_{n =  - \infty }^\infty  {{{\left| {x[n]} \right|}^2}}  = \frac{1}{{2\pi }}\int\limits_{ - \pi }^\pi  {{{\left| {X(\omega )} \right|}^2}d\omega } 
+    \end{equation}
+\end{enumerate}
+
+\begin{defn}{\textbf{{Z-Transform}}}
+If $x[n]$ is a function where $n \in \bN$, then its discrete-time Fourier transform $X(\omega)$ is 
+\begin{equation}
+    X(z) = \sum\limits_{n = -\infty}^\infty {x[n] z^{-n}}
+\end{equation}
+\end{defn}    
+
+If $X(z)$ exists when $|z| = 1$, $X(e^{j \omega})$ is equal to the DTFT of $x[n]$. 
+
+\textbf{Remark}: $Z\{ x[n - k] \} = z^{-k}(X(z) - \sum\limits_{i=-k}^{-1} x_i z^{-i}) $.
+
+Z-Transform General Properties
+
+\begin{enumerate}
+\item 
+\begin{equation}
+    \begin{gathered}
+        a{x_1}[n] + b{x_2}[n]\overset Z \longleftrightarrow a{X_1}(z) + b{X_2}(z) \\ 
+        {\text{ROC}} = {R_{x1}}\bigcap {{R_{x2}}}  \\ 
+      \end{gathered} 
+\end{equation}
+
+\item 
+\begin{equation}
+    \begin{gathered}
+        x[n - {n_0}]\overset Z \longleftrightarrow {z^{ - {n_0}}}X(z) \\ 
+        {\text{ROC}} = {R_x} \\ 
+      \end{gathered} 
+\end{equation}
+
+\item 
+\begin{equation}
+\begin{gathered}
+    nx[n]\overset Z \longleftrightarrow  - z\frac{{dx(z)}}{{dz}} \\ 
+    {\text{ROC}} = {R_x} \\ 
+  \end{gathered} 
+\end{equation}
+
+\item 
+\begin{equation}
+    \begin{gathered}
+        {x^*}[n]\overset Z \longleftrightarrow {X^*}({z^*}) \\ 
+        {\text{ROC}} = {R_x} \\ 
+      \end{gathered} 
+\end{equation}
+
+\item 
+\begin{equation}
+    \begin{gathered}
+        {x_1}[n] * {x_2}[n]\overset Z \longleftrightarrow {X_1}(z){X_2}(z) \\ 
+        {\text{ROC}} = {R_{x1}}\bigcap {{R_{x2}}}  \\ 
+      \end{gathered} 
+\end{equation}
+
+\begin{equation}
+    \begin{gathered}
+        y[n] = x[n] * h[n] = \sum\limits_{k = 0}^M {h[k]x[n - k]}  \\ 
+         = \sum\limits_{k = 0}^M {h[k]} X(z){z^{ - k}} \\ 
+         = X(z)H(z) \\ 
+      \end{gathered} 
+\end{equation}
+
+\item 
+\begin{equation}
+    x[0] = \mathop {\lim }\limits_{z \to \infty } X(z),x[n] = 0{\text{ }}\forall n < 0 
+\end{equation}
+
+\end{enumerate}
+
+\begin{defn}{\textbf{{Region of Convergence}}}
+    The region of convergence (ROC), or more generally the radius of convergence, is a circle which 
+    defines two sets of values, one of which converges under a transformation and one that diverges. 
+\end{defn}  
+
+ROC General Properties
+\begin{enumerate}
+    \item The ROC is a ring or disk centered at the origin of a z-plane.
+    \item The ROC cannot contain any poles.
+    \item If $x[n]$ is always finite than the ROC is the entire z-plane with the exception of $z=0$, or $z=\infty$.
+    \item If $x[n]$ is right sided, the ROC extends from the outermost pole.
+    \item If $x[n]$ is left sided, the ROC extends from the innermost pole to 0.
+    \item If $x[n]$ is two-sided, the ROC is a ring bounded by two poles.
+    \item The ROC is connected.
+\end{enumerate}

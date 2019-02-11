@@ -1,0 +1,84 @@
+\chapter{The Sampling Theorem}
+
+\section{Deriving the Sampling Theorem }
+
+
+
+\begin{thm}{\textbf{Sampling Theorem}}
+The discrete-time Fourier transform of the sampled sequence $x[n]$ relates to the continuous-time Fourier transform of the signal $x_a(t)$ as
+
+\begin{equation}
+X\left( {\Omega T} \right) = \frac{1}{T}\sum\limits_{n =  - \infty }^\infty  {{X_a}\left( {\frac{\omega }{T} + \frac{{n2\pi }}{T}} \right)}.
+\end{equation}
+\end{thm}
+
+\begin{proof}
+By the sampling relation,  
+
+\begin{equation}
+X\left( \omega  \right) = \sum\limits_{n =  - \infty }^\infty  {{x_a}(nT){e^{ - j\omega n}}} .
+\end{equation}
+
+This can be expressed in term of the continuous-time Fourier transformation of $x_a(t)$,
+
+\begin{equation}
+\begin{aligned}
+X\left( \omega  \right) &= \sum\limits_{n =  - \infty }^\infty  {\frac{1}{{2\pi }}\int\limits_{ - \infty }^\infty  {{X_a}(\Omega ){e^{j\Omega nt}}d\Omega } {e^{ - j\omega n}}} \\
+ &= \frac{1}{{2\pi }}\int\limits_{ - \infty }^\infty  {\sum\limits_{n =  - \infty }^\infty  {{X_a}\left( \Omega  \right)} {e^{ - j\omega n}}{e^{j\Omega nt}}d\Omega } .
+\end{aligned}
+\end{equation}
+
+\begin{lemma} \label{comb}
+Given $\omega \in [-\pi, \pi]$, 
+\begin{equation}
+\mathop {\lim }\limits_{N \to \infty } \sum\limits_{n =  - N}^N {{e^{jn\omega }}}  = 2\pi \delta \left( \omega  \right).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Recall the geometric identity,
+
+\begin{equation}
+\begin{aligned}
+\mathop {\lim }\limits_{N \to \infty } \sum\limits_{n =  - N}^N {{e^{jn\omega }}}  &= \mathop {\lim }\limits_{N \to \infty } {e^{ - j\omega N}}\sum\limits_{n = 0}^N {{e^{jn\omega }}} \\
+ &= \mathop {\lim }\limits_{N \to \infty } {e^{ - j\omega N}}\frac{{1 - {e^{j\left( {2N + 1} \right)\omega }}}}{{1 - {e^{j\omega }}}}
+\end{aligned}
+\end{equation}
+
+As $\text{sinc}(x) = e^{jx} - e^{-j}$,
+
+\begin{equation}
+\begin{aligned}
+\mathop {\lim }\limits_{N \to \infty } \sum\limits_{n =  - N}^N {{e^{jn\omega }}}  &= \mathop {\lim }\limits_{N \to \infty } \left( {2N + 1} \right)\frac{{\text{sinc} \left( {\left( {\frac{{2N + 1}}{2}} \right)\omega } \right)}}{{\text{sinc} \left( {\frac{\omega }{2}} \right)}} \\
+&= \alpha \delta(\omega)
+\end{aligned}
+\end{equation}
+
+It is clear that the expression is proportional to the dirac delta function $\delta(\omega)$. Integrating the original expression over all values of $\omega$ will solve for $\alpha$:
+
+\begin{equation}
+\int\limits_{ - \pi }^\pi  {\mathop {\lim }\limits_{N \to \infty } \sum\limits_{n =  - N}^N {{e^{jn\omega }}} } d\omega  = 2\pi 
+\end{equation}
+
+Thus,
+
+\begin{equation}
+\mathop {\lim }\limits_{N \to \infty } \sum\limits_{n =  - N}^N {{e^{jn\omega }}} = 2 \pi \delta(\omega). 
+\end{equation}
+\end{proof}
+
+Accordingly, from Lemma \ref{comb},
+
+\begin{equation}
+X\left( \omega  \right) = \int\limits_{ - \infty }^\infty  {\sum\limits_{n =  - \infty }^\infty  {{X_a}\left( \Omega  \right)\delta \left( {\left( {\Omega T - \omega } \right) - n2\pi } \right)} d\Omega }.
+\end{equation}
+
+Simplify,
+
+\begin{equation}
+\begin{aligned}
+X\left( \omega  \right) &= \frac{1}{T}\sum\limits_{n =  - \infty }^\infty  {\int\limits_{ - \infty }^\infty  {{X_a}\left( \Omega  \right)\delta \left( {\Omega  - \frac{\omega }{T} - \frac{{n2\pi }}{T}} \right)d\Omega } } \\
+ &= \frac{1}{T}\sum\limits_{n =  - \infty }^\infty  {{X_a}\left( {\frac{\omega }{T} + \frac{{n2\pi }}{T}} \right)} .
+\end{aligned}
+\end{equation}
+\end{proof}

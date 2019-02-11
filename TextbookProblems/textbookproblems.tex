@@ -1,0 +1,289 @@
+\chapter{Textbook Problems}
+
+\section{Discrete Time Signals Problems}
+\subsection{Impulse Response from LCCDE (2.4)}
+\subsubsection{Problem}
+Consider the linear constant-coefficient difference equation
+\begin{equation}
+    y[n] - \frac{3}{4} y[n-1] + \frac{1}{8} y[n-2] = 2x[n-1]
+\end{equation}
+
+Determine $y[n]$ when $x[n] = \delta[n]$ and $y=0,  n < 0$.
+
+\subsubsection{Solution Using The Characteristic Polynomial}
+
+Assume a solution of the form,
+
+\begin{equation}
+    y[n] = A a^n u[n]
+\end{equation}
+
+By substitution,
+
+\begin{equation}
+\left( {A{a^n} - \frac{3}{4}A{a^{n - 1}} + \frac{1}{8}A{a^{n - 2}}} \right)u[n] = 2\delta [n - 1]
+\end{equation}
+
+Allow $n=0$,
+
+\begin{equation}
+    \begin{aligned}
+        A - \frac{3}{4}A{a^{ - 1}} + \frac{1}{8}A{a^{ - 2}} &= 0\\
+        1 - \frac{3}{4}{a^{ - 1}} + \frac{1}{8}{a^{ - 2}} &= 0
+        \end{aligned}
+\end{equation}
+
+By factorization, it is evident that the solutions for $a$ are $\frac{1}{2}$, $\frac{1}{4}$. 
+The homogeneous solution, then, becomes
+
+\begin{equation}
+    y[n] = A_1 \left(\frac{1}{2} \right)^n u[n] + A_2 \left( \frac{1}{4} \right)^n u[n].
+\end{equation}
+
+Observe the system at two values,
+\begin{equation}
+    \begin{array}{*{20}{c}}
+        {{A_1} + {A_2} = 0}&{n = 0}\\
+        {\frac{1}{2}{A_1} + \frac{1}{4}{A_2} = 2}&{n = 1}
+        \end{array}
+\end{equation}
+
+Therefore, the impulse response is,
+
+\begin{equation}
+    \begin{aligned}
+    y[n] &= 8 \left(\frac{1}{2} \right)^n u[n] -8 \left( \frac{1}{4} \right)^n u[n] \\
+    &= 8 \left( 2^{-n} - 4^{-n} \right) u[n].
+    \end{aligned}
+\end{equation}
+
+\subsubsection{Solution Using the Z-Transform}
+
+Take the Z-transform of the LCCDE,
+
+\begin{equation}
+Z\left\{ {y[n] - \frac{3}{4}y[n - 1] + \frac{1}{8}y[n - 2]} \right\} = Z\left\{ {2\delta [n - 1]} \right\}
+\end{equation}
+
+Considering the initial conditions,
+
+\begin{equation}
+    \begin{aligned}
+        Y(z) - \frac{3}{4}{z^{ - 1}}\left( {Y(z) - y[ - 1]z} \right) + \frac{1}{8}{z^{ - 2}}\left( {Y(z) - y[ - 2]{z^2} - y[ - 1]z} \right) = 2\\
+        Y(z) - \frac{3}{4}{z^{ - 1}}Y(z) + \frac{1}{8}{z^{ - 2}}Y(z) = 2
+        \end{aligned}
+\end{equation}
+
+Solve for $Y(z)$ and express it in expanded form,
+
+\begin{equation}
+    Y(z) = \frac{2}{{1 - \frac{3}{4}{z^{ - 1}} + \frac{1}{8}{z^{ - 2}}}} = \frac{2}{{\left( {1 - \frac{{{z^{ - 1}}}}{2}} \right)\left( {1 - \frac{{{z^{ - 1}}}}{4}} \right)}} = \frac{8}{{1 - \frac{{{z^{ - 1}}}}{2}}} - \frac{8}{{1 - \frac{{{z^{ - 1}}}}{4}}}
+\end{equation}
+
+Obtain $y[n]$ using the inverse Z-transform,
+
+\begin{equation}
+    y[n] = {Z^{ - 1}}\left\{ {Y(z)} \right\} = 8\left( {{2^{ - n}}} \right)u[n] - 8\left( {{4^{ - n}}} \right)u[n]
+\end{equation}
+
+\subsection{Step Response from LCCDE (2.5)}
+
+\subsubsection{Problem}
+
+Consider a causal LTI system described by 
+
+\begin{equation}
+    y[n]  - y[n-1] + 6 y[n-2] = 2 x[n-1].
+\end{equation}
+
+Determine the step response of the system.
+
+\subsubsection{Solution Using Discrete Convolution}
+
+First solve for the impulse response,
+
+\begin{equation}
+    h[n] = 2 \left(3^n - 2^n \right) u[n]
+\end{equation}
+
+Recall that
+
+\begin{equation}
+    y[n] = x[n] * h[n] = \sum\limits_{m=-\infty}^{\infty} x[n - m] h[m].
+\end{equation}
+
+By substitution,
+
+\begin{equation}
+    \begin{aligned}
+        y[n] &= \sum\limits_{m =  - \infty }^\infty  {u[n - m]2\left( {{3^m} - {2^m}} \right)u[m]} \\
+         &= \sum\limits_{m = 0}^\infty  {u[n - m]2\left( {{3^m} - {2^m}} \right)} \\
+         &= \sum\limits_{m = 0}^n {2\left( {{3^m} - {2^m}} \right)} 
+        \end{aligned}
+\end{equation}
+
+Note that this is the accumulation of $h[n]$ from 0 to $n$. Using the fact that
+
+\begin{equation}
+    \sum\limits_{m = 0}^n {{r^m}}  = \frac{{1 - {r^n}}}{{1 - r}},
+\end{equation}
+
+it is evident that
+
+\begin{equation}
+    y[n] = \left(3 \left(3^n\right) + 6 \left(2^n\right) + 1 \right)u[n].
+\end{equation}
+
+\subsubsection{Solution Using the Z-Transform}
+
+Using the system rest condition, the initial conditions are set to zero. Accordingly, $Y(z)$ 
+can be solved for as
+
+\begin{equation}
+    \begin{aligned}
+        Y(z) - {z^{ - 1}}5Y(z) + 6{z^{ - 2}}Y(z) = 2{z^{ - 1}}Z\left\{ {u[n]} \right\}\\
+        Y(z)\left( {1 - 5{z^{ - 1}} + 6{z^{ - 2}}} \right) = 2{z^{ - 1}}\frac{1}{{1 - {z^{ - 1}}}}.
+        \end{aligned}
+\end{equation}
+
+
+Hence,
+
+\begin{equation}
+    Y(z) = \frac{{2{z^{ - 1}}}}{{\left( {1 - 3{z^{ - 1}}} \right)\left( {1 - 2{z^{ - 1}}} \right)\left( {1 - {z^{ - 1}}} \right)}}.
+\end{equation}
+
+The inverse Z-transform can be solved for using partial fraction expansion,
+
+\begin{equation}
+Y(z) = \frac{3}{{1 - 3{z^{ - 1}}}} + \frac{6}{{1 - 2{z^{ - 1}}}} + \frac{1}{{1 - {z^{ - 1}}}}
+\end{equation}
+
+\begin{equation}
+    y[n] = {Z^{ - 1}}\left\{ {Y(z)} \right\} = \left( {3\left( {{3^n}} \right) + 6\left( {{2^n}} \right) + 1} \right)u[n].
+\end{equation}
+
+
+\subsection{Causal and Anti-Causal Solutions from LCCDE (2.16)}
+
+\subsubsection{Problem}
+
+Consider the LCCDE
+
+\begin{equation}
+    y[n] - \frac{1}{4} y[n-1] - \frac{1}{8} y[n-2] = 3 x[n]
+\end{equation}
+
+Find the impulse response of the causal and anti-causal LTI systems characterized by the equation.
+
+\subsubsection{Solution}
+Using an assumed solution, the causal solution can be found as
+
+\begin{equation}
+    h[n] = 2 \left( \frac{1}{2} \right)^n u[n] + \left( - \frac{1}{4} \right)^n u[n].
+\end{equation}
+
+The anti-causal solution, then, is
+
+\begin{equation}
+    h[n] = -2 \left( \frac{1}{2} \right)^n u[-n-1] - \left( - \frac{1}{4} \right)^n u[-n-1].
+\end{equation}
+
+A system is said to be stable if
+
+\begin{equation}
+    \sum\limits_{n =  - \infty }^\infty  {\left| {h[n]} \right|}  < \infty.
+\end{equation}
+
+The causal absolute sum is 
+
+\begin{equation}
+    \begin{aligned}
+        \sum\limits_{n =  - \infty }^\infty  {\left| {h[n]} \right|}  &= \sum\limits_{n = 0}^\infty  {2{{\left( {\frac{1}{2}} \right)}^n} + {{\left( { - \frac{1}{4}} \right)}^n}} \\
+         &= \frac{{24}}{5}
+        \end{aligned}
+\end{equation}
+
+Being absolutely summable, the system is stable. On the other hand, for the anti-causal case,
+
+\begin{equation}
+    \begin{aligned}
+        \sum\limits_{n =  - \infty }^\infty  {\left| {h[n]} \right|}  &= \sum\limits_{n =  - \infty }^{ - 1} {2{{\left( {\frac{1}{2}} \right)}^n} + {{\left( {\frac{1}{4}} \right)}^n}} \\
+         &= \infty 
+        \end{aligned}
+\end{equation}
+
+Thus, the anti-causal system is unstable. 
+
+
+\section{Sampling of Continuous Time Signals Problems}
+
+\subsection{Determining Analog Frequency from Digital Frequency (4.2)}
+
+\subsubsection{Problem}
+
+The sequence
+
+\begin{equation}
+    x[n] = \cos \left( \frac{\pi}{4} n \right), -\infty < n < \infty
+\end{equation}
+
+was obtained by sampling a continuous-time signal
+
+\begin{equation}
+    x_c (t) = \cos(\Omega_0 t), -\infty < t < \infty
+\end{equation}
+
+at a sampling rate of 1000 samples/s. Find the possible positive values of $\Omega_0$ 
+could have resulted in the sequence $x[n]$.
+
+\subsubsection{Solution}
+
+Recall that 
+
+\begin{equation}
+    x_c (nT) = x[n].
+\end{equation}
+
+Solve for when the two signals equal one another when $t=nT$,
+
+\begin{equation}
+    \begin{aligned}
+        \frac{\pi }{4}n + 2\pi nm &= \frac{{{\Omega _0}n}}{{1000}}\\
+        \frac{\pi }{4} + 2\pi m &= \frac{{{\Omega _0}}}{{1000}}\\
+         \Rightarrow {\Omega _0} &= 250\pi  + 2000\pi m .
+        \end{aligned}
+\end{equation}
+
+Therefore, the first two positive analog frequencies are $\Omega_0 = 250 \pi, 2250 \pi$.
+
+\subsection{Determining Sampling Frequency from a Sampled Signal (4.4)}
+
+The continuous-time signal
+
+\begin{equation}
+    x_c (t) = \sin (20 \pi t) + \cos (40 \pi t)
+\end{equation}
+
+is sampled with a sampling period $T$ to obtain the discrete-time signal
+
+\begin{equation}
+    x[n] = \sin \left( \frac{\pi n}{5} \right) + \cos \left( \frac{2 \pi n}{5} \right).
+\end{equation}
+
+Find possible values of $T$.
+
+\subsubsection{Solution}
+
+Using the periodic sampling definition,
+
+\begin{equation}
+    \begin{aligned}
+        \frac{{\pi n}}{5} + 2\pi nm &= 20\pi nT\\
+         \Rightarrow T &= \frac{1}{{100}} + \frac{m}{{10}}
+        \end{aligned}
+\end{equation}
+
+Two values of $T$ are $\frac{1}{100}, \frac{11}{100}$.
+
+

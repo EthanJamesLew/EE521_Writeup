@@ -1,0 +1,352 @@
+\chapter{ECE 465 Material}
+
+\section{Homeworks}
+
+\subsection{Homework 2}
+
+\subsubsection{Problem}
+
+In a DSP application, it requires an A/D converter with a 1-volt full scale. 
+It also requires that the RMS value of the quantization noise to be less than 
+0.001 volt.
+
+\begin{enumerate}
+    \item What is the required resolution (how many bits) of this converter? 
+    What is the actual RMS value of the noise in this converter? 
+    \item  If one wants to record a 5-minute audio signal using that converter 
+    with a sampling rate of 44 kHz, how many bits of disk space is required?
+\end{enumerate}
+
+\subsubsection{Solution}
+Assuming a constant noise function, $E$, being the ideal quantizer. The RMS voltage can be expressed,
+
+\begin{equation}
+{E_{rms}} = \sqrt {\frac{1}{Q}\int\limits_{ - Q/2}^{Q/2} {{{\left| {E(e)} \right|}^2}de} }  = \sqrt {\frac{1}{Q}\int\limits_{ - Q/2}^{Q/2} {{e^2}de} }  = \frac{Q}{{\sqrt {12} }}
+\end{equation}
+
+A linear relationship exists between $E_{rms}$ and $Q$. Therefore, the specified noise requirement can be solved for
+
+\begin{equation}
+\begin{aligned}
+  {E_{rms}} = \frac{Q}{{\sqrt {12} }} &\leqslant 0.001 \hfill \\
+   \Rightarrow Q &\leqslant 0.003464 \hfill \\ 
+\end{aligned} 
+\end{equation}
+
+The minimum number of bits can be solved for
+
+\begin{equation}
+\begin{aligned}
+  {B_{\min }} &= \left\lceil {\lg \left( {\frac{R}{Q}} \right)} \right\rceil  \hfill \\
+   &= \left\lceil {\lg \left( {\frac{1}{{0.0035}}} \right)} \right\rceil  \hfill \\
+   &= 9 \hfill \\ 
+\end{aligned} 
+\end{equation}
+
+The ADC can be improved by using a more typical value of 10 bits.
+
+Using 9 bits, the new RMS is
+
+\begin{equation}
+\begin{aligned}
+  E_{rms} &= \frac{R}{{{2^B}\sqrt{12}}} \hfill \\
+   &= \frac{1}{{{2^9}\sqrt {12} }} \hfill \\
+   &\approx 0.00056 \hfill \\ 
+\end{aligned} 
+\end{equation}
+
+
+For the disk space per audio recording, the number of storage bits per signal is
+\begin{equation}
+\begin{aligned}
+  N\left( B \right) &= \left( {\frac{{44k{\text{ samples}}}}{{\text{s}}}} \right)\left( {\frac{{60{\text{ s}}}}{{{\text{min}}}}} \right)\left( {\frac{{5{\text{ min}}}}{{{\text{signal}}}}} \right)\left( {\frac{{B{\text{ bits}}}}{{{\text{sample}}}}} \right) \hfill \\
+   &= 13.2{\text{M}} \cdot B \hfill \\ 
+\end{aligned} 
+\end{equation}
+
+Accordingly,
+
+\begin{equation}
+N(9)=118.8 \text{ Mb}= 118.8 \text{ Mb}
+\end{equation}
+
+This would consume 29k blocks on a hard disc with a minimum addressable unit of 4096 bits.
+
+\subsection{Homework 3}
+
+\subsubsection{Problem}
+
+Determine the z-transform of the following sequences:
+
+\begin{equation}
+x[n] = {\left( {0.7} \right)^n}u[n]
+\end{equation}
+    
+\begin{equation}
+x[n] = 4\delta [n] + {\left( {0.5} \right)^n}u[n - 3]
+\end{equation}
+
+\subsubsection{Solution}
+
+The z-transform is defined as follow
+\begin{equation}
+X(z) = \sum\limits_{n =  - \infty }^\infty  {x[n]{z^{ - n}}} 
+\end{equation}
+
+Substitute and reduce for the given $x[n]$
+
+\begin{equation}
+\begin{aligned}
+X(z) &= \sum\limits_{n =  - \infty }^\infty  {x[n]{z^{ - n}}}  \hfill \\
+&= \sum\limits_{n =  - \infty }^\infty  {{{\left( {0.7} \right)}^n}u[n]{z^{ - n}}}  \hfill \\
+&= \sum\limits_{n = 0}^\infty  {{{\left( {0.7} \right)}^n}{z^{ - n}}}  \hfill \\
+&= {\sum\limits_{n = 0}^\infty  {\left( {\frac{{0.7}}{z}} \right)} ^{n}} \hfill \\ 
+\end{aligned} 
+\end{equation}
+
+This reduces into a geometric series. Therefore the solution is
+\begin{equation}
+X(z) = \frac{z}{{z - 0.7}},\left| z \right| > 0.7
+\end{equation}
+
+Using similar methods,
+	\begin{equation}
+	\begin{aligned}
+  X(z) &= \sum\limits_{n =  - \infty }^\infty  {x[n]{z^{ - n}}}  \hfill \\
+   &= \sum\limits_{n =  - \infty }^\infty  {\left( {4\delta [n] + {{\left( {0.5} \right)}^n}u[n - 3]} \right){z^{ - n}}}  \hfill \\
+   &= 4\sum\limits_{n =  - \infty }^\infty  {\delta [n]} {z^{ - n}} + \sum\limits_{n = 3}^\infty  {{{\left( {0.5} \right)}^n}{z^{ - n}}}  \hfill \\
+   &= 4 - \sum\limits_{n = 0}^2 {{{\left( {\frac{{0.5}}{z}} \right)}^n}}  + \sum\limits_{n = 0}^\infty  {{{\left( {\frac{{0.5}}{z}} \right)}^n}}  \hfill \\
+   &= 4 - 1 - \frac{{0.5}}{z} - \frac{{0.25}}{{{z^2}}} + \sum\limits_{n = 0}^\infty  {{{\left( {\frac{{0.5}}{z}} \right)}^n}}  \hfill \\
+\end{aligned} 
+	\end{equation}
+	Therefore, the solution is
+	\begin{equation}
+	X(z)= 3 - \frac{{0.25}}{z}\left( {2 - \frac{1}{z}} \right) + \frac{z}{{z - 0.5}},\left| z \right| > 0.5 
+    \end{equation}
+
+\subsubsection{Problem}
+
+An LTI system has the following impulse response 
+
+\begin{equation}
+h[n]=\cos\left( n\frac{\pi}{5}\right)u[n].
+\end{equation}
+
+Is the system stable? Why? Repeat the analysis for
+
+\begin{equation}
+    h[n]=0.9^nu[n].
+\end{equation}
+
+
+\subsubsection{Solution}
+    
+The absolute sum of $h[n]$ is
+
+\begin{equation}
+\begin{aligned}
+\sum\limits_{n =  - \infty }^\infty  {\left| 0.9^n u[n] \right|}  &= \sum\limits_{n = 0}^\infty  {0.9^n } \hfill \\
+   &= \frac{1}{{0.1}} \hfill \\
+   &= 10 \hfill \\ 
+\end{aligned}
+\end{equation}
+
+The system described by $h[n]$ is stable if and only if it is absolutely summable. That is,
+\begin{equation}
+\sum\limits_{n =  - \infty }^\infty  {\left| {h[n]} \right| < \infty } 
+\end{equation}
+
+The system is causal, so
+
+\begin{equation}
+\sum\limits_{n =  - \infty }^\infty  {\left| {\cos \left( {\frac{{n\pi }}{5}} \right)u[n]} \right|}  = \sum\limits_{n = 0}^\infty  {\left| {\cos \left( {\frac{{n\pi }}{5}} \right)} \right|} 
+\end{equation}
+
+The terms in the sum repeat periodically, allowing the sum to be decomposed
+
+\begin{equation}
+\begin{aligned}
+\sum\limits_{n =  - \infty }^\infty  {\left| {\cos \left( {\frac{{n\pi }}{5}} \right)u[n]} \right|}  =& \sum\limits_{n = 0}^\infty  {\left| {\cos \left( 0 \right)} \right|}  + \sum\limits_{n = 0}^\infty  {\left| {\cos \left( {\frac{\pi }{5}} \right)} \right|}  + \sum\limits_{n = 0}^\infty  {\left| {\cos \left( {\frac{{2\pi }}{5}} \right)} \right|}  + \hfill \\
+&\sum\limits_{n = 0}^\infty  {\left| {\cos \left( {\frac{{3\pi }}{5}} \right)} \right|}  + \sum\limits_{n = 0}^\infty  {\left| {\cos \left( {\frac{{4\pi }}{5}} \right)} \right|} \hfill \\
+\end{aligned}
+\end{equation}
+
+One of the sums can be expressed as
+\begin{equation}
+\sum\limits_{n = 0}^\infty  {\left| {\cos \left( 0 \right)} \right|}  = \sum\limits_{n = 0}^\infty  1 
+\end{equation}
+
+which diverges. Therefore, the original sum must also diverge. \textbf{The system is unstable}.
+\\ 
+The sum converges. \textbf{The system is stable}.
+
+\section{Exams}
+
+\subsection{Midterm}
+
+\subsubsection{Problem}
+
+Consider the following signal
+
+\begin{equation}
+    x(t) = \sin \left(10000\pi t \right) + \sin \left(20000\pi t \right) + \sin \left(60000\pi t \right)
+\end{equation}
+
+The signal is pre-filtered by an anti-aliasing filter $H(f)$, 
+and then sampled at the sampling rate of 40,000 Hz. 
+The samples are then reconstructed by an ideal reconstruction filter to 
+reproduce the analog signal. Find the output signal for the following cases:
+
+\begin{enumerate}
+    \item $H(f) = 1$ i.e. no prefiltering
+    \item $H(f)$ is an ideal LPF with $f_c = 20,000$ Hz.
+    \item $H(f)$ is a filter with flat response up to 20,000 Hz, and attenuate at the rate of 60dB per Octave beyond 
+    20,000 Hz.
+\end{enumerate}
+
+
+\subsubsection{Solution}
+
+Constructing the graph in figure \ref{fig:465midalias}, it is evident that 
+
+\begin{equation}
+    y(t) = \sin \left(10000\pi t \right).
+\end{equation}
+
+Referring to figure \ref{fig:465midlpf}, for the ideal LPF,
+
+\begin{equation}
+    y(t) = \sin \left(10000\pi t \right) + \sin \left(20000\pi t \right).
+\end{equation}
+
+For the case of the non-ideal LPF, calculate how many octaves away the 
+30 kHz tone is,
+
+\begin{equation}
+    \lg \left( {\frac{{30}}{{20}}} \right) \approx 0.585{\text{ octaves}}
+\end{equation}
+
+The attenuation, then, is
+
+\begin{equation}
+    60\lg \left( {\frac{{30}}{{20}}} \right) \approx 35.1{\text{ dB }} \approx {\rm{ 0}}{\rm{.0176}}
+\end{equation}
+
+Accordingly, for the non-ideal LPF,
+
+\begin{equation}
+    y(t) = \sin \left(10000\pi t \right) + 0.982 \sin \left(20000\pi t \right).
+\end{equation}
+
+
+\begin{figure}
+    \centering
+\begin{tikzpicture}
+    \makeatletter
+    \begin{axis}[axis lines=middle,xmin=-60000,xmax=60000,ymin=-2,ymax=2, xlabel={$f$},
+        ylabel={$Y\left(f \right)$}]
+    \addplot +[dirac] coordinates {(-5000,1) (5000,-1) (-10000,1) (10000,-1) (-30000,1) (30000,-1)};
+    \addplot +[dirac] coordinates {(-5000+40000,1) (5000+40000,-1) (-10000+40000,1) (10000+40000,-1) (-30000+40000,1) (30000+40000,-1)};
+    \addplot +[dirac] coordinates {(-5000-40000,1) (5000-40000,-1) (-10000-40000,1) (10000-40000,-1) (-30000-40000,1) (30000-40000,-1)};
+    \addplot +[thick, mark=none, dashed,  const plot] 
+    coordinates {(-60000, 0) (-20000,0) (-20000, 1) (20000, 1) (20000, 0) (60000, 0)};
+    \end{axis}
+    \end{tikzpicture}
+\caption{Spectrum of $y(t)$ produced from no prefiltering. Note that the aliases cancel out frequencies present in the Nyquist window.}
+\label{fig:465midalias}
+\end{figure}
+
+\begin{figure}
+    \centering
+\begin{tikzpicture}
+    \makeatletter
+    \begin{axis}[axis lines=middle,xmin=-60000,xmax=60000,ymin=-2,ymax=2, xlabel={$f$},
+        ylabel={$Y\left(f \right)$}]
+    \addplot +[dirac] coordinates {(-5000,1) (5000,-1) (-10000,1) (10000,-1) };
+    \addplot +[dirac] coordinates {(-5000+40000,1) (5000+40000,-1) (-10000+40000,1) (10000+40000,-1) };
+    \addplot +[dirac] coordinates {(-5000-40000,1) (5000-40000,-1) (-10000-40000,1) (10000-40000,-1) };
+    \addplot +[thick, mark=none, dashed,  const plot] 
+    coordinates {(-60000, 0) (-20000,0) (-20000, 1) (20000, 1) (20000, 0) (60000, 0)};
+    \end{axis}
+    \end{tikzpicture}
+\caption{Spectrum of $y(t)$ produced from an ideal LPF with $f_c$ = 20,000 Hz. Note that the 10,000 Hz tone is preserved.}
+\label{fig:465midlpf}
+\end{figure}
+
+\subsubsection{Problem}
+An LTI system has the following impulse response
+\begin{enumerate}
+    \item $h[n] = (-1)^n u[n]$. Is this system stable? Why?
+    \item Repeat with $h[n] = (0.9)^n \cos \left( \frac{n \pi}{5} \right) u[n]$
+\end{enumerate}
+\subsubsection{Solution}
+
+A system is said to be stable if its impulse response is absolutely stable.
+
+\begin{equation}
+    \sum\limits_{n =  - \infty }^\infty  {\left| {h[n]} \right|}  < \infty 
+\end{equation}
+
+For 1), 
+
+\begin{equation}
+    \begin{aligned}
+        \sum\limits_{n =  - \infty }^\infty  {\left| {{{( - 1)}^n}u[n]} \right|}  &= \sum\limits_{n = 0}^\infty  {\left| {{{( - 1)}^n}} \right|} \\
+         &= \infty 
+        \end{aligned}
+\end{equation}
+
+For 2),
+
+\begin{equation}
+    \begin{aligned}
+            \sum\limits_{n =  - \infty }^\infty  {\left| {{{(0.9)}^n}\cos \left( {\frac{{n\pi }}{5}} \right)u[n]} \right|}  &< \sum\limits_{n = 0}^\infty  {\left| {{{(0.9)}^n}} \right|} \\
+             &= \frac{1}{{1 - 0.9}}
+        \end{aligned}
+\end{equation}
+
+Being less than 10, the system is stable.
+
+%\begin{equation}
+%    \begin{aligned}
+%            \sum\limits_{n =  - \infty }^\infty  {\left| {{{(0.9)}^n}\cos \left( {\frac{{n\pi }}{5}} \right)u[n]} \right|}  =& \sum\limits_{n = 0}^\infty  {\left| {{{(0.9)}^n}\cos \left( {\frac{{n\pi }}{5}} \right)} \right|} \\
+%             =& 2\sum\limits_{n = 0}^\infty  {\left| {{{(0.9)}^{5n}}} \right|}  + \cos \left( {\frac{\pi }{5}} \right)\sum\limits_{n = 0}^\infty  {\left| {{{(0.9)}^{5n + 1}} + {{(0.9)}^{5n + 6}}} \right|}  + \cos \left( {\frac{{2\pi }}{5}} \right)\sum\limits_{n = 0}^\infty  {\left| {{{(0.9)}^{5n + 2}} + {{(0.9)}^{5n + 7}}} \right|} \\
+%             &+ \cos \left( {\frac{{3\pi }}{5}} \right)\sum\limits_{n = 0}^\infty  {\left| {{{(0.9)}^{5n + 3}} + {{(0.9)}^{5n + 8}}} \right|}  + \cos \left( {\frac{{4\pi }}{5}} \right)\sum\limits_{n = 0}^\infty  {\left| {{{(0.9)}^{5n + 4}} + {{(0.9)}^{5n + 9}}} \right|} 
+%        \end{aligned}
+%\end{equation}
+
+\subsubsection{Problem}
+An LTI system has a transfer function: 
+
+\begin{equation}
+    H(z) = \frac{3 + 0.1 z^{-1}}{1-0.5z^{-1} -0.66 z^{-2}}
+\end{equation}
+
+\begin{enumerate}
+    \item Find the causal impulse response $h[n]$.
+    \item Find the stable impulse response $h[n]$.
+\end{enumerate}
+
+\subsubsection{Solution}
+
+Expand $H(z)$ to facilitate solving for the inverse Z-transform, 
+\begin{equation}
+    H(z) = \frac{{3 + 0.1{z^{ - 1}}}}{{\left( {1 + 0.6{z^{ - 1}}} \right)\left( {1 - 1.1{z^{ - 1}}} \right)}} = \frac{2}{{1 + 0.6{z^{ - 1}}}} - \frac{{3.8}}{{1 - 1.1{z^{ - 1}}}}.
+\end{equation}
+
+So, for the causal impulse response,
+\begin{equation}
+    h[n] = {Z^{ - 1}}\left\{ {\frac{2}{{1 + 0.6{z^{ - 1}}}} - \frac{{3.8}}{{1 - 1.1{z^{ - 1}}}}} \right\} = \left( {2{{\left( {0.6} \right)}^n} - 3.8{{\left( {1.1} \right)}^n}} \right)u[n].
+\end{equation}
+
+For the stable impulse response,
+\begin{equation}
+    h[n] = {Z^{ - 1}}\left\{ {\frac{2}{{1 + 0.6{z^{ - 1}}}} - \frac{{3.8}}{{1 - 1.1{z^{ - 1}}}}} \right\} = \left( {2{{\left( {0.6} \right)}^n}u[n] + 3.8{{\left( {1.1} \right)}^n}u[ - n - 1]} \right).
+\end{equation}
+
+
+
+
+
+
+

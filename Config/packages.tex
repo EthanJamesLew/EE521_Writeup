@@ -1,0 +1,73 @@
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{algorithm,algorithmic}
+\usepackage{graphicx,rotating}
+\usepackage{complexity}
+\usepackage{tikz}
+\usepackage{xspace}
+\usepackage{fix-cm}
+\usetikzlibrary{shadows}
+\usetikzlibrary{shapes,positioning,arrows}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{shadows,arrows,patterns,automata,calc,intersections,fit,shapes.misc, decorations.markings}
+\usepackage[underline=false,rounded corners=true]{pgf-umlsd}
+\usepackage{todonotes}
+\usepackage{paralist}
+\setdefaultenum{1)}{(a)}{i)}{A)}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{array}  
+\usepackage[margin=0.75in]{geometry}   
+                                                                  
+
+\usepackage{lmodern}
+\usepackage[english]{babel}
+
+
+\usepackage[
+pdfauthor={Ethan Lew},
+pdfsubject={DSP},
+pdftitle={EE521_Material},
+%pdfkeywords={},
+bookmarks=false,
+breaklinks=true,
+colorlinks=true,
+linkcolor=black,
+citecolor=black,
+urlcolor=black,
+%pdfstartpage=19,
+pdfpagelayout=SinglePage
+]{hyperref}
+
+\usepackage{wrapfig,epsfig}
+
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{todonotes}
+% Fonts
+\usepackage{microtype}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[utf8]{inputenc}
+\usepackage{inconsolata}
+
+\usepackage{enumitem}
+
+\usepackage{float}
+\usepackage{listing}
+\usepackage{mdframed}
+\usepackage{caption,subcaption}
+\usepackage{bbm}
+
+\usepackage{pgfplots}
+
+\pgfplotsset{
+    dirac/.style={
+        mark=triangle*,
+        mark options={scale=2},
+        ycomb,
+        scatter,
+        visualization depends on={y/abs(y)-1 \as \sign},
+        scatter/@pre marker code/.code={\scope[rotate=90*\sign,yshift=-2pt]}
+    }
+}
