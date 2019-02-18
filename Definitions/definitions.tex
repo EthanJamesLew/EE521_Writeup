@@ -3,21 +3,39 @@
 
 \section{Signals and Sequences}
 
-\begin{defn}{\textbf{Kronecker Delta Function}}
+\begin{defn}{\textbf{Kronecker Delta Sequence}}
     The Kronecker delta function, $\delta[n]$, is a sequence defined as
 
     \begin{equation}
         \delta [n] = \left\{ {\begin{array}{*{20}{c}}
             0&{n \ne 0}\\
-            1&{n = 1}
+            1&{n = 0}
             \end{array}} \right.,n \in \bN
     \end{equation}
 \end{defn}
-
 \textbf{Remark:}
 \begin{equation}
     x[n] = \sum\limits_{k =  - \infty }^\infty  {x[k]\delta [n - k]} 
 \end{equation}
+
+\begin{defn}{\textbf{Exponential Sequence}}
+    An exponential sequence is a monotonically increasing or decreasing sequence of the form
+
+    \begin{equation}
+        x[n] = A \alpha ^ n.        
+    \end{equation}
+\end{defn}
+
+\begin{defn}{\textbf{Sinusoidal Sequence}}
+    A sinusoidal sequence is a sequence that can be expressed in the form
+
+    \begin{equation}
+        x[n] = A \cos (\omega_0 n + \phi).  
+    \end{equation}
+\end{defn}
+
+\textbf{Remark}: $A \exp(j(\omega_0+2\pi)n) = A \exp(j \omega_0 n)$.
+
 
 
 \begin{defn}{\textbf{Periodic Sampling}}
@@ -26,6 +44,60 @@ A discrete-time representation $x[n]$ of a continuous signal $x_a(t)$ can be obt
 x[n] = x_a(nT)
 \end{equation}
 where $T$ is the sampling period and $f_s=1/T$ is the sampling frequency.
+\end{defn}
+
+\begin{defn}{\textbf{Discrete Time System}}
+    A discrete-time system is mathematically defined as a transformation that maps an input sequence $x[n]$ into an output sequence with values $y[n]$,
+
+    \begin{equation}
+        y[n] = T\{x[n]\}.
+    \end{equation}
+\end{defn}
+
+\begin{defn}{\textbf{Time Invariant System}}
+    A discrete-time system is mathematically defined as a transformation that maps an input sequence $x[n]$ into an output sequence with values $y[n]$,
+
+    \begin{equation}
+        y[n] = T\{x[n]\}.
+    \end{equation}
+\end{defn}
+
+\begin{defn}{\textbf{Causality}}
+    A system is causal if, for every choice of $n_0$, the output sequence at index $n=n_0$ depends only on the input sequence values for $n \le n_0$. That is, the system is nonanticipative. 
+\end{defn}
+
+\begin{defn}{\textbf{Stability}}
+    A system is stable in the bounded-input, bounded-output (BIBO) sense if and only if every bounded input produces a bounded output sequence. The input $x[n]$ is bounded if there exists a fixed positive finite value $B_x$ such that
+    
+    \begin{equation}
+        |x[n]| \le B_x < \infty, \forall n.
+    \end{equation}
+
+    Stability, then, requires that
+
+    \begin{equation}
+        |y[n]| \le B_y < \infty, \forall n.
+    \end{equation}
+\end{defn}
+
+\begin{defn}{\textbf{Linear System}}
+    A linear system is a system possessing a superposition characteristic, being
+
+    \begin{equation}
+        T\{ a x_1[n] + b x_2[n] \} = a T\{x_1[n]\} + b T_2 \{ x_n[2]\}.
+    \end{equation}
+\end{defn}
+
+\begin{defn}{\textbf{Inverse System}}
+    An inverse system of a system with the impulse response $h[n]$, is a system with the impulse response $h_i[n]$, satisfying
+
+    \begin{equation}
+        h[n] * h_i[n] = \delta [n].
+    \end{equation}
+\end{defn}
+
+\begin{defn}{\textbf{Initial Rest Condition}}
+    A system possessing the initial rest condition has $y[n] =0, n < n_0$ if $x[n]=0, n < n_0$.
 \end{defn}
 
 \begin{defn}{\textbf{Linear Constant Coefficient Difference Equation}}
